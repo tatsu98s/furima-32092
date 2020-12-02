@@ -31,13 +31,11 @@
 | sipping_id   | integer    | null: false                    |
 | area_id      | integer    | null: false                    |
 | day_id       | integer    | null: false                    |
-| users        | references | null: false, foreign_key: true |
-| buys         | references | null: false, foreign_key: true |
-| seller       | string     | null: false, unique: true      |
+| user         | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :users
+- belongs_to :user
 - belongs_to :buys
 
 
@@ -51,7 +49,7 @@
 ### Association
 
 - belongs_to :user
-- has_many   :items
+- belongs_to :item
 - has_one    :address
 
 
@@ -63,9 +61,9 @@
 | prefecture_id | integer    | null: false                    |
 | city          | string     | null: false                    |
 | block         | string     | null: false                    |
-|building       | string     | null: false                    |
+| building      | string     |                                |
 | tel           | string     | null: false                    |
-| buys          | references | null: false, foreign_key: true |
+| buy           | references | null: false, foreign_key: true |
 
 ### Association
 
