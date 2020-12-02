@@ -36,7 +36,7 @@
 ### Association
 
 - belongs_to :user
-- has_one    :buys
+- has_one    :buy
 
 
 ## buys テーブル
