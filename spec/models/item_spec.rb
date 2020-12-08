@@ -38,11 +38,24 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Category can't be blank", "Category is not a number")
       end
 
+      it "'---'が選択されていると出品できない" do
+        @item.category_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category must be other than 1")
+      end
+
       it "商品の状態が選択されていないと出品できない" do
         @item.condition = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition can't be blank", "Condition is not a number")
       end
+
+      it "'---'が選択されていると出品できない" do
+        @item.condition_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Condition must be other than 1")
+      end
+
 
       it "配送料の負担が選択されていないと出品できない" do
         @item.shipping = nil
@@ -50,11 +63,25 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Shipping can't be blank", "Shipping is not a number")
       end
 
+      it "'---'が選択されていると出品できない" do
+        @item.shipping_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping must be other than 1")
+      end
+
+
       it "発送元の地域が選択されていないと出品できない" do
         @item.area = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Area can't be blank", "Area is not a number")
       end
+
+      it "'---'が選択されていると出品できない" do
+        @item.area_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Area must be other than 0")
+      end
+
 
       it "発送までの日数が選択されていないと出品できない" do
         @item.day = nil
@@ -62,10 +89,29 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Day can't be blank", "Day is not a number")
       end
 
+      it "'---'が選択されていると出品できない" do
+        @item.day_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Day must be other than 1")
+      end
+
       it "商品の値段が空だと出品できない" do
         @item.price = ""
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
+      end
+
+      it "商品の値段が299円だと出品できない" do
+        @item.price = 299
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not included in the list")
+      end
+
+      it "商品の値段が10000000円だと出品できない" do
+        binding.pry
+        @item.price = 10000000
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not included in the list")
       end
     end
   end

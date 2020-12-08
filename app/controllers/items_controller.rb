@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!
-  
+
   def index
-    @items = Item.includes(:user)
+    # @items = Item.includes(:user)
   end
 
   def new
