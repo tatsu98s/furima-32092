@@ -6,7 +6,6 @@ class User < ApplicationRecord
   
   has_many :items
   has_one_attached :image
-  
 
      
   with_options presence: true do
