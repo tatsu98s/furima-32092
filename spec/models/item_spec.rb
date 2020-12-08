@@ -108,7 +108,6 @@ RSpec.describe Item, type: :model do
       end
 
       it "商品の値段が10000000円だと出品できない" do
-        binding.pry
         @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not included in the list")
