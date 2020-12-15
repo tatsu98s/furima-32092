@@ -9,6 +9,8 @@ class OrderAddress < ApplicationRecord
     validates :prefecture_id, numericality: { other_than: 0 }
     validates :city
     validates :block
+    validates :user_id
+    validates :item_id
   end
 
   def save

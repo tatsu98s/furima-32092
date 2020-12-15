@@ -6,8 +6,5 @@ FactoryBot.define do
     city              { 'テスト' }
     block             { 'テスト' }
     tel               { '09012345678' }
-
-    # association :user
-    # association :item
   end
 end

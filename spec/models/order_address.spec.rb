@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe OrderAddress, type: :model do
   before do
-    @order = FactoryBot.build(:order_address)
+    user = FactoryBot.create(:user)
+    sleep 1
+    item = FactoryBot.create(:item)
+    @order = FactoryBot.build(:order_address, user_id: user.id, item_id: item.id)
   end
 
   describe '商品購入' do
@@ -42,6 +45,12 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order.errors.full_messages).to include("Prefecture can't be blank", 'Prefecture is not a number')
       end
 
+      it '都道府県が"---"だと購入できない' do
+        @order.prefecture_id = 0
+        @order.valid?
+        expect(@order.errors.full_messages).to include('Prefecture must be other than 0')
+      end
+
       it '市町村が空だと購入できない' do
         @order.city = ''
         @order.valid?
@@ -71,8 +80,18 @@ RSpec.describe OrderAddress, type: :model do
         @order.valid?
         expect(@order.errors.full_messages).to include('Tel input only number')
       end
+
+      it '「user_id」が空だと購入できないが空だと購入できない' do
+        @order.user_id = nil
+        @order.valid?
+        expect(@order.errors.full_messages).to include("User can't be blank")
+      end
+
+      it '「item_id」が空だと購入できない' do
+        @order.item_id = nil
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Item can't be blank")
+      end
     end
   end
 end
-
-# bundle exec rspec spec/models/pu-chan_spec.rb
