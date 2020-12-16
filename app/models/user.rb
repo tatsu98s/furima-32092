@@ -19,5 +19,10 @@ class User < ApplicationRecord
     end
     validates :birthday
   end
+<<<<<<< Updated upstream
   validates :password, format: {with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i,message: 'is invalid Password Include both letters and numbers'}
 end
+=======
+  validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i }
+end
+>>>>>>> Stashed changes
