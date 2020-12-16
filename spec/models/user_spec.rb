@@ -53,20 +53,20 @@ describe User do
       it 'passwordが英字のみの場合は登録できない' do
         @user.password = 'aaaaaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", 'Password is invalid Password Include both letters and numbers')
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password is invalid")
       end
 
       it 'passwordが数字のみの場合は登録できない' do
         @user.password = '1' * 6
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", 'Password is invalid Password Include both letters and numbers')
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", 'Password is invalid')
       end
 
       it 'passwordが5文字以下であれば登録できない' do
         @user.password = 'aaaaa'
         @user.password_confirmation = 'aaaaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
+        expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
       end
 
       it 'passwordが存在してもpassword_confirmationが空では登録できない' do
